@@ -7,7 +7,8 @@
         "react-app",
         "airbnb",
         "airbnb-typescript",
-        "plugin:import/typescript"
+        "plugin:import/typescript",
+        "plugin:prettier/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -20,7 +21,8 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "prettier"
     ],
     "rules": {
         "quotes": [
@@ -39,7 +41,9 @@
         ],
         "react/jsx-uses-react": ["off"],
         "react/react-in-jsx-scope": ["off"],
-        "react/jsx-props-no-spreading": ["warn"],
-        "no-shadow": "off"
+        "react/jsx-props-no-spreading": ["off"],
+        "no-shadow": "off",
+        "react/require-default-props": "off",
+        "react/no-array-index-key": "off"
     }
 }
