@@ -1,7 +1,7 @@
 import { memo } from "react";
 
 function WeekScreen() {
-  return <div>WeekScreen</div>;
+  return <main>WeekScreen</main>;
 }
 
 export default memo(WeekScreen);
