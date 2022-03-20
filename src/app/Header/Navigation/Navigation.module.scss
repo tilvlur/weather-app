@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 25%;
+
+  .link {
+    color: black;
+    text-decoration: none;
+    outline: none;
+  }
+
+  .activeLink {
+    color: red;
+    text-decoration: none;
+    outline: none;
+  }
+}
