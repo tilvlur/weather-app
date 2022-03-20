@@ -1,7 +1,7 @@
 import { memo } from "react";
 
 function TodayScreen() {
-  return <div>TodayScreen</div>;
+  return <main>TodayScreen</main>;
 }
 
 export default memo(TodayScreen);
