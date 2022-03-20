@@ -1,0 +1,13 @@
+@import "src/style/variables";
+
+.container {
+  display: flex;
+  align-items: center;
+  height: $footerHeight;
+  padding: 0 20px;
+  color: #dcdcdc;
+  font-size: 0.8rem;
+  background-color: #9d9d9d;
+
+  border-top: 1px solid black;
+}
