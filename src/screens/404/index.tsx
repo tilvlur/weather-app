@@ -1,7 +1,7 @@
 import { memo } from "react";
 
 function NotFoundScreen() {
-  return <div>404 There nothing here!</div>;
+  return <main>404 There nothing here!</main>;
 }
 
 export default memo(NotFoundScreen);
