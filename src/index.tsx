@@ -1,6 +1,18 @@
 import React from "react";
+import { Provider } from "react-redux";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./app";
+import App from "./app/App";
+import store from "./app/store";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+// В данном месте можно сделать запрос на геолокацию
+// store.dispatch(fetchGeo());
+
+ReactDOM.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById("root"),
+);
