@@ -1,37 +1,46 @@
-import React, { memo } from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import styles from "./App.module.scss";
-import Home from "../screens/Home";
-import TodayScreen from "../screens/Today";
-import WeekScreen from "../screens/Week";
-import NotFoundScreen from "../screens/404";
 import Header from "./Header";
 import Footer from "./Footer";
-import TomorrowScreen from "../screens/Tomorrow";
-import { Routs } from "./types";
+import NotFound from "./NotFound404/NotFound";
+import {
+  getBrowserGeolocation,
+  getGeolocationFromWeb,
+  selectBrowserGeoStatus,
+} from "../features/geolocation/geolocationSlice";
+import { useAppDispatch, useAppSelector } from "../common/hooks/hooks";
 
 function App() {
-  const routs: Routs = [
-    { path: "/", element: <Home /> },
-    { path: "today", element: <TodayScreen /> },
-    { path: "tomorrow", element: <TomorrowScreen /> },
-    { path: "week", element: <WeekScreen /> },
-    { path: "*", element: <NotFoundScreen /> },
-  ];
+  const dispatch = useAppDispatch();
+  const browserGeoStatus = useAppSelector(selectBrowserGeoStatus);
+
+  // Получаем координаты пользователя
+  useEffect(() => {
+    // Если пользователь не разрешил получить координаты, пробуем
+    // получить из api, если и из api не получится, то оставляем
+    // координаты по умолчанию
+    if (browserGeoStatus === "idle") {
+      dispatch(getBrowserGeolocation());
+    } else if (browserGeoStatus === "failed") {
+      dispatch(getGeolocationFromWeb());
+    }
+  }, [browserGeoStatus, dispatch]);
 
   return (
-    <div className={styles.container}>
-      <Header />
-      <main className={styles.content}>
-        <Routes>
-          {routs.map((route, i) => (
-            <Route key={i} path={route.path} element={route.element} />
-          ))}
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <div className={styles.container}>
+        <Header />
+        <main className={styles.content}>
+          <Routes>
+            <Route path="/" element={<div>Weather App</div>} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
-export default memo(App);
+export default App;

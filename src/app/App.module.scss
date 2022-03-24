@@ -1,4 +1,4 @@
-@import "src/style/variables";
+@import "../common/styles/variables";
 
 .container {
   max-width: 1200px;
@@ -9,7 +9,8 @@
   background-color: #f8f8f8;
 
   .content {
-    background-color: yellowgreen;
     height: calc(100vh - #{$headerFooterSum});
+    overflow: auto;
+    background-color: yellowgreen;
   }
 }
