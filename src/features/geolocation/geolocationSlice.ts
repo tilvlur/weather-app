@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchUserCurrentGeo, getBrowserGeo } from "../../api/geoApi";
 import type { GeolocationState } from "./types";
-import type { RootState } from "../../app/store";
+import type { RootState, AppDispatch } from "../../app/store";
 
 const initialState: GeolocationState = {
+  status: "idle",
   fromBrowserStatus: "idle",
   fromWebStatus: "idle",
   source: "default",
@@ -11,7 +12,7 @@ const initialState: GeolocationState = {
   lon: "37.1053565",
 };
 
-export const getBrowserGeolocation = createAsyncThunk(
+const getBrowserGeolocation = createAsyncThunk(
   "geolocation/getBrowserGeolocation",
   async () => {
     const response = await getBrowserGeo();
@@ -23,7 +24,7 @@ export const getBrowserGeolocation = createAsyncThunk(
   },
 );
 
-export const getGeolocationFromWeb = createAsyncThunk(
+const getGeolocationFromWeb = createAsyncThunk(
   "geolocation/getGeolocationFromWeb",
   async () => {
     const response = await fetchUserCurrentGeo();
@@ -42,11 +43,13 @@ const geolocationSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getBrowserGeolocation.pending, (state) => {
+        state.status = "loading";
         state.fromBrowserStatus = "loading";
       })
       .addCase(getBrowserGeolocation.fulfilled, (state, action) => {
         const { lat, lon } = action.payload;
 
+        state.status = "succeeded";
         state.fromBrowserStatus = "succeeded";
         state.source = "browser";
         state.lat = lat;
@@ -61,12 +64,14 @@ const geolocationSlice = createSlice({
       .addCase(getGeolocationFromWeb.fulfilled, (state, action) => {
         const { lat, lon } = action.payload;
 
+        state.status = "succeeded";
         state.fromWebStatus = "succeeded";
         state.source = "web";
         state.lat = lat;
         state.lon = lon;
       })
       .addCase(getGeolocationFromWeb.rejected, (state) => {
+        state.status = "failed";
         state.fromWebStatus = "failed";
       });
   },
@@ -74,5 +79,13 @@ const geolocationSlice = createSlice({
 
 export default geolocationSlice.reducer;
 
-export const selectBrowserGeoStatus = (state: RootState) =>
-  state.geolocation.fromBrowserStatus;
+export const getUserGeolocation =
+  () => async (dispatch: AppDispatch, getState: () => RootState) => {
+    await dispatch(getBrowserGeolocation());
+    if (getState().geolocation.fromBrowserStatus === "failed") {
+      dispatch(getGeolocationFromWeb());
+    }
+  };
+
+export const selectGeolocationStatus = (state: RootState) =>
+  state.geolocation.status;

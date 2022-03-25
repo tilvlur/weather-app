@@ -1,9 +1,5 @@
 import axios, { AxiosResponse } from "axios";
 
-const instance = axios.create({
-  baseURL: "http://ip-api.com/",
-});
-
 export const getBrowserGeo = () =>
   new Promise<GeolocationPosition>((res, rej) => {
     if ("geolocation" in navigator) {
@@ -25,6 +21,11 @@ export const getBrowserGeo = () =>
       );
     }
   });
+
+const instance = axios.create({
+  baseURL: "http://ip-api.com/",
+  timeout: 2000,
+});
 
 export const fetchUserCurrentGeo = () =>
   instance.get("json/?fields=country,city,lat,lon").then(

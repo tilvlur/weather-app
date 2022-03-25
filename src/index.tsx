@@ -5,9 +5,6 @@ import "./index.css";
 import App from "./app/App";
 import store from "./app/store";
 
-// В данном месте можно сделать запрос на геолокацию
-// store.dispatch(fetchGeo());
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
