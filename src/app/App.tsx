@@ -5,27 +5,32 @@ import Header from "./Header";
 import Footer from "./Footer";
 import NotFound from "./NotFound404/NotFound";
 import {
-  getBrowserGeolocation,
-  getGeolocationFromWeb,
-  selectBrowserGeoStatus,
+  getUserGeolocation,
+  selectGeolocationStatus,
 } from "../features/geolocation/geolocationSlice";
 import { useAppDispatch, useAppSelector } from "../common/hooks/hooks";
+import {
+  fetchWeatherData,
+  selectWeatherStatus,
+} from "../features/weather/weatherSlice";
 
 function App() {
   const dispatch = useAppDispatch();
-  const browserGeoStatus = useAppSelector(selectBrowserGeoStatus);
+  const geolocationStatus = useAppSelector(selectGeolocationStatus);
+  const weatherStatus = useAppSelector(selectWeatherStatus);
 
-  // Получаем координаты пользователя
   useEffect(() => {
-    // Если пользователь не разрешил получить координаты, пробуем
-    // получить из api, если и из api не получится, то оставляем
-    // координаты по умолчанию
-    if (browserGeoStatus === "idle") {
-      dispatch(getBrowserGeolocation());
-    } else if (browserGeoStatus === "failed") {
-      dispatch(getGeolocationFromWeb());
-    }
-  }, [browserGeoStatus, dispatch]);
+    // Получаем координаты пользователя
+    if (geolocationStatus === "idle") dispatch(getUserGeolocation());
+
+    // Получаем данные о погоде
+    if (
+      geolocationStatus !== "idle" &&
+      geolocationStatus !== "loading" &&
+      weatherStatus === "idle"
+    )
+      dispatch(fetchWeatherData());
+  }, [dispatch, geolocationStatus, weatherStatus]);
 
   return (
     <Router>
