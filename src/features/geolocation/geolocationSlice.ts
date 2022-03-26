@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchUserCurrentGeo, getBrowserGeo } from "../../api/geoApi";
 import type { GeolocationState } from "./types";
 import type { RootState, AppDispatch } from "../../app/store";
+import { fetchUserCurrentGeo, getBrowserGeo } from "./api";
 
 const initialState: GeolocationState = {
   status: "idle",

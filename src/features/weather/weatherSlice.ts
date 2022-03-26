@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { WeatherData, WeatherGeoData, WeatherState } from "./types";
-import { weatherApi } from "../../api/weatherApi";
 import { convertUnixTimestamp } from "../../common/utils/convertUnixTimestamp";
 import type { AppDispatch, RootState } from "../../app/store";
+import { api } from "./api";
 
 const initialState: WeatherState = {
   status: "idle",
@@ -40,7 +40,7 @@ const getWeatherData = createAsyncThunk<
   WeatherData,
   { lat: string; lon: string }
 >("weather/getWeatherData", async ({ lat, lon }) => {
-  const response = await weatherApi.getWeather(lat, lon);
+  const response = await api.getWeather(lat, lon);
   const weatherData: WeatherData = {
     lat: response.lat.toString(),
     lon: response.lon.toString(),
@@ -101,7 +101,7 @@ const getWeatherGeoData = createAsyncThunk<
   WeatherGeoData,
   { lat: string; lon: string }
 >("weather/getWeatherGeoData", async ({ lat, lon }) => {
-  const response = await weatherApi.getWeatherGeo(lat, lon);
+  const response = await api.getWeatherGeo(lat, lon);
   const weatherGeoData: WeatherGeoData = {
     cityName: response[0].name,
     localCityName: {

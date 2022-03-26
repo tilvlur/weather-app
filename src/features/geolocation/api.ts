@@ -27,14 +27,13 @@ const instance = axios.create({
   timeout: 2000,
 });
 
-export const fetchUserCurrentGeo = () =>
-  instance.get("json/?fields=country,city,lat,lon").then(
-    (
-      response: AxiosResponse<{
-        country: string;
-        city: string;
-        lat: number;
-        lon: number;
-      }>,
-    ) => response.data,
-  );
+export const fetchUserCurrentGeo = async () => {
+  const response: AxiosResponse<{
+    country: string;
+    city: string;
+    lat: number;
+    lon: number;
+  }> = await instance.get("json/?fields=country,city,lat,lon");
+
+  return response.data;
+};

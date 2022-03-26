@@ -13,6 +13,7 @@ import {
   fetchWeatherData,
   selectWeatherStatus,
 } from "../features/weather/weatherSlice";
+import Map from "../features/map/Map";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -38,7 +39,7 @@ function App() {
         <Header />
         <main className={styles.content}>
           <Routes>
-            <Route path="/" element={<div>Weather App</div>} />
+            <Route path="/" element={<Map />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
