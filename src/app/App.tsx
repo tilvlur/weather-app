@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import styles from "./App.module.scss";
 import Header from "./Header";
 import Footer from "./Footer";
-import NotFound from "./NotFound404/NotFound";
+import NotFound from "./pages/Errors/NotFound/NotFound";
 import {
   getUserGeolocation,
   selectGeolocationStatus,

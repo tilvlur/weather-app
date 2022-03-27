@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { WeatherData, WeatherGeoData, WeatherState } from "./types";
 import { convertUnixTimestamp } from "../../common/utils/convertUnixTimestamp";
 import type { AppDispatch, RootState } from "../../app/store";
@@ -118,10 +118,7 @@ const weatherSlice = createSlice({
   name: "weather",
   initialState,
   reducers: {
-    setStatus(
-      state,
-      action: { payload: WeatherState["status"]; type: string },
-    ) {
+    setStatus(state, action: PayloadAction<WeatherState["status"]>) {
       state.status = action.payload;
     },
   },
