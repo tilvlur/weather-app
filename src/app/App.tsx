@@ -16,6 +16,7 @@ import {
 } from "../features/weather/weatherSlice";
 import Home from "./pages/Home";
 import { reverseGeolocationQuery } from "../features/geocoding/geocodingSlice";
+import Loading from "./pages/Loading";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -50,7 +51,7 @@ function App() {
             </Routes>
           </main>
         ) : (
-          <div className={styles.content}>Loading...</div>
+          <Loading />
         )}
         <Footer />
       </div>
