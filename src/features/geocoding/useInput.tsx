@@ -8,7 +8,7 @@ const useInput = (initialValue: string) => {
 
   const handleChange = async (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
-    const response = await fetchPlaces(event.target.value);
+    const response = await fetchPlaces.forward(event.target.value);
     if (response) setSuggestions(response);
   };
 

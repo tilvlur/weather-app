@@ -2,6 +2,7 @@ import useInput from "./useInput";
 import { useAppDispatch } from "../../common/hooks/hooks";
 import { setUserSelectedLocation } from "./geocodingSlice";
 import type { GeocodingDALobj } from "./api/types";
+import { fetchWeatherData } from "../weather/weatherSlice";
 
 function AutocompleteInput() {
   const { value, onChange, clearInput, clearSuggestions, suggestions } =
@@ -10,9 +11,12 @@ function AutocompleteInput() {
 
   const onChooseSuggestionHandle = (place: GeocodingDALobj) => {
     dispatch(setUserSelectedLocation(place));
+    dispatch(fetchWeatherData());
+    clearInput();
     clearSuggestions();
   };
 
+  // TODO добавить кнопку очистки инпута
   return (
     <div>
       <input
@@ -20,7 +24,6 @@ function AutocompleteInput() {
         placeholder="Find city..."
         value={value}
         onChange={onChange}
-        onBlur={clearInput}
         type="text"
       />
       <div style={{ position: "absolute", top: 100, height: 500 }}>

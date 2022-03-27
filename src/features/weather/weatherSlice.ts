@@ -164,7 +164,14 @@ const { setStatus } = weatherSlice.actions;
 
 export const fetchWeatherData =
   () => async (dispatch: AppDispatch, getState: () => RootState) => {
-    const { lat, lon } = getState().geolocation;
+    let { lat, lon } = getState().geolocation;
+    // Если пользователь выбирает город в поиске, то выводим данные по этому городу
+    const { userSelection } = getState().geocoding;
+    if (userSelection) {
+      lat = userSelection.lat;
+      lon = userSelection.lon;
+    }
+
     dispatch(setStatus("loading"));
     try {
       await dispatch(getWeatherData({ lat, lon })).unwrap();
@@ -176,3 +183,4 @@ export const fetchWeatherData =
   };
 
 export const selectWeatherStatus = (state: RootState) => state.weather.status;
+export const selectWeather = (state: RootState) => state.weather;

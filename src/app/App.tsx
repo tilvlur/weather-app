@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { batch } from "react-redux";
 import styles from "./App.module.scss";
 import Header from "./Header";
 import Footer from "./Footer";
-import NotFound from "./pages/Errors/NotFound/NotFound";
+import NotFound from "./pages/Errors/NotFound";
 import {
   getUserGeolocation,
   selectGeolocationStatus,
@@ -13,7 +14,8 @@ import {
   fetchWeatherData,
   selectWeatherStatus,
 } from "../features/weather/weatherSlice";
-import Map from "../features/map/Map";
+import Home from "./pages/Home";
+import { reverseGeolocationQuery } from "../features/geocoding/geocodingSlice";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -30,19 +32,26 @@ function App() {
       geolocationStatus !== "loading" &&
       weatherStatus === "idle"
     )
-      dispatch(fetchWeatherData());
+      batch(() => {
+        dispatch(reverseGeolocationQuery());
+        dispatch(fetchWeatherData());
+      });
   }, [dispatch, geolocationStatus, weatherStatus]);
 
   return (
     <Router>
       <div className={styles.container}>
         <Header />
-        <main className={styles.content}>
-          <Routes>
-            <Route path="/" element={<Map />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
+        {weatherStatus === "succeeded" ? (
+          <main className={styles.content}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+        ) : (
+          <div className={styles.content}>Loading...</div>
+        )}
         <Footer />
       </div>
     </Router>
