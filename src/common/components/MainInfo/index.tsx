@@ -18,6 +18,10 @@ function MainInfo() {
   } = useAppSelector(selectWeather);
   const canSavePlace = useAppSelector(selectCanSavePlace);
 
+  const renderCityName = cityName ? <span>{cityName}, </span> : null;
+  const renderState = state ? <span>{state}, </span> : null;
+  const renderCountry = country ? <span>{country}</span> : null;
+
   const { temp, windSpeed, weatherDescription } = currentWeather;
   const { description: weather, icon: iconAppend } = weatherDescription;
   const imgSrc = `http://openweathermap.org/img/wn/${iconAppend}@2x.png`;
@@ -43,12 +47,12 @@ function MainInfo() {
         <div className={styles.temp}>{temp} °C</div>
       </div>
       <div className={styles.location}>
-        <span>{cityName}, </span>
-        <span>{state}, </span>
-        <span>{country}</span>
+        {renderCityName}
+        {renderState}
+        {renderCountry}
       </div>
       <div className={styles.weatherDescription}>
-        <span>span{weather}, </span>
+        <span>{weather}, </span>
         <span>Wind - {windSpeed}m/s</span>
       </div>
     </div>

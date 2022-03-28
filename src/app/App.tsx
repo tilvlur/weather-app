@@ -4,7 +4,6 @@ import { batch } from "react-redux";
 import styles from "./App.module.scss";
 import Header from "./Header";
 import Footer from "./Footer";
-import NotFound from "./pages/Errors/NotFound";
 import {
   getUserGeolocation,
   selectGeolocationStatus,
@@ -15,9 +14,9 @@ import {
   selectWeatherStatus,
 } from "../features/weather/weatherSlice";
 import { reverseGeolocationQuery } from "../features/geocoding/geocodingSlice";
-import Loading from "./pages/Loading";
 import Home from "./pages/Home";
 import Today from "./pages/Today";
+import RequestLC from "../common/components/RequestLC";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -49,11 +48,11 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="today" element={<Today />} />
-              <Route path="*" element={<NotFound />} />
+              <Route path="*" element={<RequestLC variant="404" />} />
             </Routes>
           </main>
         ) : (
-          <Loading />
+          <RequestLC variant={weatherStatus} />
         )}
         <Footer />
       </div>
