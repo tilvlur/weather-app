@@ -38,7 +38,8 @@ function MainInfo() {
         className={styles.saveBtn}
         onClick={onBtnClickHandle}
       >
-        Save place
+        <span>Save</span>
+        <span> place</span>
       </button>
       <div className={styles.main}>
         <div className={styles.imgContainer}>

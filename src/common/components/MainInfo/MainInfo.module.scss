@@ -6,12 +6,55 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 150px 30px;
+  padding: 150px 30px;
+  border-bottom: 1px solid $appGray800;
 
   .saveBtn {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 30px;
+    right: 30px;
+
+    // Сброс стилей
+    appearance: none;
+
+    // Базовая настнойка
+    color: $appButtonTextColor;
+    padding: 6px 7px 8px 7px;
+    border-width: 0;
+    border-radius: 8px;
+    background: $appButtonBgColor;
+    font-size: 0.9rem;
+    font-family: inherit;
+    min-width: 100px;
+    cursor: pointer;
+
+    &:hover {
+      color: darken($appButtonTextColor, 4%);
+      background: darken($appButtonBgColor, 4%);
+
+      span:last-child {
+        color: darken($appTurquoise, 4%);
+      }
+    }
+
+    &:active {
+      outline: none;
+      box-shadow: 0 0 0 2px lighten($appButtonBgColor, 25%);
+    }
+
+    &[disabled] {
+      color: darken($appButtonTextColor, 4%);
+      background: lighten($appButtonBgColor, 25%);
+      cursor: not-allowed;
+
+      span:last-child {
+        color: darken($appButtonTextColor, 4%);
+      }
+    }
+
+    span:last-child {
+      color: $appTurquoise;
+    }
   }
 
   .main {
@@ -20,12 +63,12 @@
     gap: 15px;
 
     .imgContainer {
-      width: 50px;
-      height: 50px;
+      width: 55px;
+      height: 55px;
       overflow: hidden;
-      border: 2px solid $appDarkGray;
+      border: 2px solid $appGray800;
       border-radius: 8px;
-      background-color: $appImgBg;
+      background-color: $appGray150;
 
       img {
         width: 100%;
