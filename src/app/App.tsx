@@ -14,9 +14,10 @@ import {
   fetchWeatherData,
   selectWeatherStatus,
 } from "../features/weather/weatherSlice";
-import Home from "./pages/Home";
 import { reverseGeolocationQuery } from "../features/geocoding/geocodingSlice";
 import Loading from "./pages/Loading";
+import Home from "./pages/Home";
+import Today from "./pages/Today";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -47,6 +48,7 @@ function App() {
           <main className={styles.content}>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="today" element={<Today />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

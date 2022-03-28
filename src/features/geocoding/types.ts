@@ -2,6 +2,7 @@ import { GeocodingDALobj } from "./api/types";
 
 export interface UserSelectionItem extends Partial<GeocodingDALobj> {
   timestamp: string;
+  linkAppend: string;
 }
 
 type SavedPlaces = Array<UserSelectionItem>;

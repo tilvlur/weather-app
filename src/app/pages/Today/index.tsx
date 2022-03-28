@@ -1,13 +1,13 @@
 import { memo } from "react";
 import MainInfo from "../../../common/components/MainInfo";
 
-function Home() {
+function Today() {
   return (
     <>
       <MainInfo />
-      <div>HomePage</div>
+      <div>TODAY</div>
     </>
   );
 }
 
-export default memo(Home);
+export default memo(Today);
