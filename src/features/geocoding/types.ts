@@ -1,7 +1,14 @@
 import { GeocodingDALobj } from "./api/types";
 
+export interface PlaceNameForRender {
+  cityName: string;
+  state: string | null;
+  country: string;
+}
+
 export interface UserSelectionItem extends Partial<GeocodingDALobj> {
   timestamp: string;
+  placeNameForRender: PlaceNameForRender;
   linkAppend: string;
 }
 

@@ -1,0 +1,80 @@
+@import "src/common/styles/variables";
+
+$searchBoxHeight: 30px;
+$closeBtnSide: 20px;
+
+.container {
+  position: relative;
+
+  .searchBoxContainer {
+    position: relative;
+    display: flex;
+
+    .searchBox {
+      width: 250px;
+      height: $searchBoxHeight;
+      padding: 6px 25px 8px 7px;
+      font-size: 0.9rem;
+      border: 0;
+      border-radius: 8px;
+    }
+
+    .clearBtn {
+      width: $closeBtnSide;
+      height: $closeBtnSide;
+      padding: 2px;
+      position: absolute;
+      right: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-self: center;
+
+      appearance: none;
+      color: $appButtonTextColor;
+      background: $appCloseButtonBgColor;
+      border: 0;
+      border-radius: $closeBtnSide / 2;
+      font-size: 6px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+
+      &:hover {
+        color: darken($appButtonTextColor, 4%);
+        background: darken($appCloseButtonBgColor, 4%);
+      }
+
+      &:active {
+        outline: none;
+        box-shadow: 0 0 0 2px lighten($appCloseButtonBgColor, 25%);
+      }
+
+      &[disabled] {
+        color: darken($appButtonTextColor, 4%);
+        background: lighten($appCloseButtonBgColor, 25%);
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .suggestions {
+    width: 100%;
+    position: absolute;
+    top: $searchBoxHeight;
+    background-color: $appWhite;
+    margin-top: 5px;
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 1;
+
+    .suggestionItem {
+      padding: 7px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: darken($appWhite, 15);
+      }
+    }
+  }
+}

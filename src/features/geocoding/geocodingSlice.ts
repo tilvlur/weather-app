@@ -3,6 +3,7 @@ import type { GeocodingState, UserSelectionItem } from "./types";
 import type { GeocodingDALobj } from "./api/types";
 import type { AppDispatch, RootState } from "../../app/store";
 import { fetchPlaces } from "./api";
+import { PlaceNameForRender } from "./types";
 
 const initialState: GeocodingState = {
   source: null,
@@ -38,21 +39,33 @@ const geocodingSlice = createSlice({
       if (canSavePlace(state)) state.canSavePlace = true;
     },
     saveSelectedPlace: {
-      reducer(state, action: PayloadAction<{ timestamp: string }>) {
+      reducer(
+        state,
+        action: PayloadAction<
+          Pick<
+            UserSelectionItem,
+            "timestamp" | "placeNameForRender" | "linkAppend"
+          >
+        >,
+      ) {
         if (state.canSavePlace) {
-          const { timestamp } = action.payload;
+          const { timestamp, placeNameForRender, linkAppend } = action.payload;
           const payload: UserSelectionItem = {
             timestamp,
+            placeNameForRender,
+            linkAppend,
             ...state.userSelection,
           };
           state.savedPlaces.push(payload);
           state.canSavePlace = false;
         }
       },
-      prepare() {
+      prepare(placeNameForRender: PlaceNameForRender, linkAppend: string) {
         return {
           payload: {
             timestamp: new Date().toISOString(),
+            placeNameForRender,
+            linkAppend,
           },
         };
       },
@@ -77,8 +90,17 @@ const geocodingSlice = createSlice({
 
 export default geocodingSlice.reducer;
 
-export const { setUserSelectedLocation, saveSelectedPlace } =
-  geocodingSlice.actions;
+export const { setUserSelectedLocation } = geocodingSlice.actions;
+const { saveSelectedPlace } = geocodingSlice.actions;
+export const savePlace =
+  () => (dispatch: AppDispatch, getState: () => RootState) => {
+    const { cityName, state, country } = getState().weather;
+    if (cityName && country) {
+      const placeNameForRender = { cityName, state, country };
+      const preparedCityName = cityName.toLowerCase().replace(/\s/g, "-");
+      dispatch(saveSelectedPlace(placeNameForRender, preparedCityName));
+    }
+  };
 
 export const reverseGeolocationQuery =
   () => (dispatch: AppDispatch, getState: () => RootState) => {

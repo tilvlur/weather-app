@@ -1,3 +1,5 @@
+@import "src/common/styles/variables";
+
 .container {
   display: flex;
   justify-content: space-between;
@@ -5,13 +7,13 @@
   width: 25%;
 
   .link {
-    color: black;
+    color: $appTextColor;
     text-decoration: none;
     outline: none;
   }
 
   .activeLink {
-    color: red;
+    color: $appOrange500;
     text-decoration: none;
     outline: none;
   }
