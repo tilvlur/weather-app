@@ -44,28 +44,28 @@ const geocodingSlice = createSlice({
         action: PayloadAction<
           Pick<
             UserSelectionItem,
-            "timestamp" | "placeNameForRender" | "linkAppend"
+            "timestamp" | "placeNameForRender" | "cityLink"
           >
         >,
       ) {
         if (state.canSavePlace) {
-          const { timestamp, placeNameForRender, linkAppend } = action.payload;
+          const { timestamp, placeNameForRender, cityLink } = action.payload;
           const payload: UserSelectionItem = {
             timestamp,
             placeNameForRender,
-            linkAppend,
+            cityLink,
             ...state.userSelection,
           };
           state.savedPlaces.push(payload);
           state.canSavePlace = false;
         }
       },
-      prepare(placeNameForRender: PlaceNameForRender, linkAppend: string) {
+      prepare(placeNameForRender: PlaceNameForRender, cityLink: string) {
         return {
           payload: {
             timestamp: new Date().toISOString(),
             placeNameForRender,
-            linkAppend,
+            cityLink,
           },
         };
       },
@@ -94,11 +94,10 @@ export const { setUserSelectedLocation } = geocodingSlice.actions;
 const { saveSelectedPlace } = geocodingSlice.actions;
 export const savePlace =
   () => (dispatch: AppDispatch, getState: () => RootState) => {
-    const { cityName, state, country } = getState().weather;
-    if (cityName && country) {
-      const placeNameForRender = { cityName, state, country };
-      const preparedCityName = cityName.toLowerCase().replace(/\s/g, "-");
-      dispatch(saveSelectedPlace(placeNameForRender, preparedCityName));
+    const { cityName, cityLink, state, country } = getState().weather;
+    if (cityName && cityLink && country) {
+      const placeNameForRender = { cityName, state, country, cityLink };
+      dispatch(saveSelectedPlace(placeNameForRender, cityLink));
     }
   };
 
@@ -108,9 +107,9 @@ export const reverseGeolocationQuery =
     dispatch(reverseQuery({ lat, lon }));
   };
 
-export const selectUserSelection = (state: RootState) =>
-  state.geocoding.userSelection;
 export const selectCanSavePlace = (state: RootState) =>
   state.geocoding.canSavePlace;
 export const selectSavedPlaces = (state: RootState) =>
   state.geocoding.savedPlaces;
+export const selectUserSelection = (state: RootState) =>
+  state.geocoding.userSelection;

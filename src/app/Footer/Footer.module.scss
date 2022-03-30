@@ -10,4 +10,13 @@
   background-color: #9d9d9d;
 
   border-top: 1px solid black;
+
+  .appName {
+    color: $appTurquoise;
+  }
+
+  .name {
+    color: $appOrange400;
+    text-shadow: 0 1px 1px $appTextColor;
+  }
 }

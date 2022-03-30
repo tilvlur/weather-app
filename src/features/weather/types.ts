@@ -10,6 +10,7 @@ export interface WeatherState {
   getWeatherStatus: "idle" | "loading" | "succeeded" | "failed";
   getWeatherGeoStatus: "idle" | "loading" | "succeeded" | "failed";
   cityName: NullStr;
+  cityLink: NullStr;
   localCityName: {
     en: NullStr;
     ru: NullStr;
@@ -61,6 +62,7 @@ export interface WeatherData
   extends Omit<
     WeatherState,
     | "cityName"
+    | "cityLink"
     | "localCityName"
     | "state"
     | "country"

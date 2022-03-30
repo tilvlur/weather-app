@@ -9,6 +9,7 @@ const initialState: WeatherState = {
   getWeatherStatus: "idle",
   getWeatherGeoStatus: "idle",
   cityName: null,
+  cityLink: null,
   localCityName: {
     en: null,
     ru: null,
@@ -148,6 +149,9 @@ const weatherSlice = createSlice({
         state.getWeatherGeoStatus = "succeeded";
         const { payload } = action;
         state.cityName = payload.cityName;
+        state.cityLink = payload.cityName
+          ? payload.cityName.toLowerCase().replace(/\s/g, "-")
+          : null;
         state.localCityName = payload.localCityName;
         state.state = payload.state;
         state.country = payload.country;

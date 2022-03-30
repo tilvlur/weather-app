@@ -2,7 +2,7 @@ import { memo } from "react";
 import styles from "./RequestLC.module.scss";
 
 interface RequestLCProps {
-  variant: "idle" | "loading" | "failed" | "404";
+  variant: "idle" | "loading" | "failed" | "404" | "autoSearchFailed";
 }
 
 function Loading() {
@@ -24,7 +24,19 @@ function NotFound() {
   return (
     <div className={styles.container}>
       <div>Error 404</div>
-      <div className={styles.description}>There nothing here...</div>
+      <div className={styles.description}>There&apos;s nothing here...</div>
+    </div>
+  );
+}
+
+function ManualSearch() {
+  return (
+    <div className={styles.container}>
+      <div>Couldn&apos;t determine your location</div>
+      <div className={styles.description}>
+        Please use the search to get the weather forecast for the selected
+        location
+      </div>
     </div>
   );
 }
@@ -39,6 +51,8 @@ function RequestLC({ variant }: RequestLCProps) {
       return <Failed />;
     case "404":
       return <NotFound />;
+    case "autoSearchFailed":
+      return <ManualSearch />;
     default:
       return null;
   }

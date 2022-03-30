@@ -9,7 +9,7 @@ export interface PlaceNameForRender {
 export interface UserSelectionItem extends Partial<GeocodingDALobj> {
   timestamp: string;
   placeNameForRender: PlaceNameForRender;
-  linkAppend: string;
+  cityLink: string;
 }
 
 type SavedPlaces = Array<UserSelectionItem>;

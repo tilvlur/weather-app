@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { memo, useEffect } from "react";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { batch } from "react-redux";
 import styles from "./App.module.scss";
 import Header from "./Header";
@@ -11,17 +11,23 @@ import {
 import { useAppDispatch, useAppSelector } from "../common/hooks/hooks";
 import {
   fetchWeatherData,
+  selectWeather,
   selectWeatherStatus,
 } from "../features/weather/weatherSlice";
 import { reverseGeolocationQuery } from "../features/geocoding/geocodingSlice";
-import Home from "./pages/Home";
-import Today from "./pages/Today";
 import RequestLC from "../common/components/RequestLC";
+
+type Params = {
+  city?: string;
+};
 
 function App() {
   const dispatch = useAppDispatch();
   const geolocationStatus = useAppSelector(selectGeolocationStatus);
   const weatherStatus = useAppSelector(selectWeatherStatus);
+  const { cityLink } = useAppSelector(selectWeather);
+  const navigate = useNavigate();
+  const params = useParams<Params>();
 
   useEffect(() => {
     // Получаем координаты пользователя
@@ -32,32 +38,40 @@ function App() {
       geolocationStatus !== "idle" &&
       geolocationStatus !== "loading" &&
       weatherStatus === "idle"
-    )
+    ) {
       batch(() => {
         dispatch(reverseGeolocationQuery());
         dispatch(fetchWeatherData());
       });
-  }, [dispatch, geolocationStatus, weatherStatus]);
+    }
+
+    // Если данные о погоде есть, то добавляем к пути название места
+    if (cityLink && cityLink !== params.city) {
+      navigate(`/${cityLink}`);
+    }
+  }, [
+    cityLink,
+    dispatch,
+    geolocationStatus,
+    navigate,
+    params,
+    params.city,
+    weatherStatus,
+  ]);
 
   return (
-    <Router>
-      <div className={styles.container}>
-        <Header />
-        {weatherStatus === "succeeded" ? (
-          <main className={styles.content}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="today" element={<Today />} />
-              <Route path="*" element={<RequestLC variant="404" />} />
-            </Routes>
-          </main>
-        ) : (
-          <RequestLC variant={weatherStatus} />
-        )}
-        <Footer />
-      </div>
-    </Router>
+    <div className={styles.container}>
+      <Header />
+      {weatherStatus === "succeeded" ? (
+        <main className={styles.content}>
+          <Outlet />
+        </main>
+      ) : (
+        <RequestLC variant={weatherStatus} />
+      )}
+      <Footer />
+    </div>
   );
 }
 
-export default App;
+export default memo(App);

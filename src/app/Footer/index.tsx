@@ -4,7 +4,10 @@ import styles from "./Footer.module.scss";
 function Footer() {
   return (
     <footer className={styles.container}>
-      &copy; Weather App by Timur Khrustalev 2022. All right reserved
+      <span>&copy;&nbsp;</span>
+      <span className={styles.appName}>Weather App&nbsp;</span>
+      <span className={styles.name}>by Timur Khrustalev&nbsp;</span> 2022. All
+      right reserved
     </footer>
   );
 }

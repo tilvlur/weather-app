@@ -10,11 +10,14 @@
     color: $appTextColor;
     text-decoration: none;
     outline: none;
-  }
 
-  .activeLink {
-    color: $appOrange500;
-    text-decoration: none;
-    outline: none;
+    &__active {
+      color: $appOrange500;
+    }
+
+    &__disabled {
+      pointer-events: none;
+      color: lighten($appTextColor, 50);
+    }
   }
 }

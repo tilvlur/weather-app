@@ -17,7 +17,7 @@
     // Сброс стилей
     appearance: none;
 
-    // Базовая настнойка
+    // Базовая настройка
     color: $appButtonTextColor;
     padding: 6px 7px 8px 7px;
     border-width: 0;
@@ -46,6 +46,7 @@
       color: darken($appButtonTextColor, 4%);
       background: lighten($appButtonBgColor, 25%);
       cursor: not-allowed;
+      box-shadow: inherit;
 
       span:last-child {
         color: darken($appButtonTextColor, 4%);
