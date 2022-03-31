@@ -1,0 +1,116 @@
+@import "src/common/styles/variables";
+
+.container {
+  padding: 10px 30px;
+
+  .heading {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+
+    .table {
+      width: 35%;
+      min-width: 400px;
+      display: flex;
+      flex-direction: column;
+      font-size: 0.9rem;
+
+      .table_heading {
+        font-size: 1rem;
+        font-weight: 600;
+        border-bottom: 1px solid $appGray800;
+      }
+
+      &_heading,
+      &_content {
+        display: flex;
+        padding: 15px 0;
+
+        .leftCol,
+        .rightCol {
+          display: flex;
+        }
+
+        .leftCol {
+          width: 55%;
+
+          .description {
+            margin-left: 15px;
+            font-style: italic;
+
+            .main,
+            .humidity,
+            .windSpeed {
+              margin-bottom: 15px;
+
+              span {
+                color: $appTurquoise;
+              }
+            }
+
+            .windSpeed {
+              margin-bottom: 0;
+            }
+          }
+        }
+
+        .rightCol {
+          width: 45%;
+
+          .temperature {
+            display: flex;
+
+            .labels {
+            }
+
+            .values {
+              margin-left: 30px;
+              text-align: right;
+            }
+
+            .label,
+            .value {
+              margin-bottom: 15px;
+
+              &__min {
+                color: $appTurquoise;
+                font-weight: 600;
+              }
+
+              &__max {
+                color: $appOrange500;
+                font-weight: 600;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .map {
+      width: 60%;
+      border: 1px solid $appGray800;
+      border-radius: 8px;
+      overflow: hidden;
+
+      @media (max-width: 1100px) {
+        width: 55%;
+      }
+
+      @media (max-width: 985px) {
+        width: 50%;
+      }
+
+      @media (max-width: 890px) {
+        width: 100%;
+      }
+    }
+  }
+}
