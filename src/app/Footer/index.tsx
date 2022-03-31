@@ -6,8 +6,7 @@ function Footer() {
     <footer className={styles.container}>
       <span>&copy;&nbsp;</span>
       <span className={styles.appName}>Weather App&nbsp;</span>
-      <span className={styles.name}>by Timur Khrustalev&nbsp;</span> 2022. All
-      right reserved
+      <span className={styles.name}>by Timur Khrustalev&nbsp;</span>
     </footer>
   );
 }
