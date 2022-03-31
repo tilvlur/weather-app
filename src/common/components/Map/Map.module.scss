@@ -1,0 +1,32 @@
+@import "src/common/styles/variables";
+
+.description {
+  background-color: $appWhite;
+  position: absolute;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: -2px 1px 2px $appGray800;
+
+  .weather,
+  .temp,
+  .wind {
+    font-size: 0.8rem;
+  }
+
+  .weather {
+    font-weight: 600;
+  }
+
+  .temp {
+    color: $appOrange500;
+  }
+
+  .wind {
+    font-style: italic;
+  }
+}
+
+.marker {
+  box-shadow: -2px 1px 2px 0px $appGray800;
+  border-radius: 8px;
+}
