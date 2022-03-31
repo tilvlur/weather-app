@@ -25,7 +25,7 @@ function SavedPlaces() {
   const renderSavedPlaces = isSavedPlaces ? (
     <div className={styles.placeCards}>
       {savedPlaces.map((p) => (
-        <PlaceCard isActive={p.id === userSelection!.id} {...p} />
+        <PlaceCard isActive={p.id === userSelection!.id} key={p.id} {...p} />
       ))}
     </div>
   ) : null;
