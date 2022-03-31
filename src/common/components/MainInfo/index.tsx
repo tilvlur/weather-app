@@ -6,6 +6,7 @@ import {
   savePlace,
   selectCanSavePlace,
 } from "../../../features/geocoding/geocodingSlice";
+import WeatherIcon from "../WeatherIcon";
 
 function MainInfo() {
   const dispatch = useAppDispatch();
@@ -23,8 +24,10 @@ function MainInfo() {
   const renderCountry = country ? <span>{country}</span> : null;
 
   const { temp, windSpeed, weatherDescription } = currentWeather;
-  const { description: weather, icon: iconAppend } = weatherDescription;
-  const imgSrc = `http://openweathermap.org/img/wn/${iconAppend}@2x.png`;
+  const { description: weather, icon, main } = weatherDescription;
+
+  const renderWeatherIcon =
+    icon && main ? <WeatherIcon icon={icon} alt={main} /> : null;
 
   const onBtnClickHandle = () => {
     dispatch(savePlace());
@@ -42,9 +45,7 @@ function MainInfo() {
         <span> place</span>
       </button>
       <div className={styles.main}>
-        <div className={styles.imgContainer}>
-          <img src={imgSrc} alt="weather icon" />
-        </div>
+        {renderWeatherIcon}
         <div className={styles.temp}>{temp} °C</div>
       </div>
       <div className={styles.location}>
