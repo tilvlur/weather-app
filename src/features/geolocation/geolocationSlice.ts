@@ -8,8 +8,9 @@ const initialState: GeolocationState = {
   fromBrowserStatus: "idle",
   fromWebStatus: "idle",
   source: "default",
-  lat: "55.5820947",
-  lon: "37.1053565",
+  // Координаты Москвы по умолчанию, если автоматически определить не получилось
+  lat: "55.75583",
+  lon: "37.61778",
 };
 
 const getBrowserGeolocation = createAsyncThunk(
@@ -29,8 +30,8 @@ const getGeolocationFromWeb = createAsyncThunk(
   async () => {
     const response = await fetchUserCurrentGeo();
     const geolocation: Pick<GeolocationState, "lat" | "lon"> = {
-      lat: response.lat.toString(),
-      lon: response.lon.toString(),
+      lat: response.latitude.toString(),
+      lon: response.longitude.toString(),
     };
     return geolocation;
   },

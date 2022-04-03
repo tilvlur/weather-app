@@ -23,17 +23,25 @@ export const getBrowserGeo = () =>
   });
 
 const instance = axios.create({
-  baseURL: "http://ip-api.com/",
+  baseURL: "https://api.ipgeolocation.io/ipgeo",
   timeout: 2000,
 });
 
+const params = {
+  apiKey: `${process.env.REACT_APP_IPGEOLOCATION_API_KEY}`,
+  fields: "geo",
+  exclude:
+    "continent_code,continent_name,zipcode,state_prov,district,country_code2,country_code3",
+};
+const path = `?apiKey=${params.apiKey}&fields=${params.fields}&excludes=${params.exclude}`;
+
 export const fetchUserCurrentGeo = async () => {
   const response: AxiosResponse<{
-    country: string;
+    country_name: string;
     city: string;
-    lat: number;
-    lon: number;
-  }> = await instance.get("json/?fields=country,city,lat,lon");
+    latitude: number;
+    longitude: number;
+  }> = await instance.get(path);
 
   return response.data;
 };
