@@ -1,35 +1,96 @@
-# Weather App
+# ⛅️ WEATHER APP
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![JavaScript](https://img.shields.io/badge/-JavaScript-yellow?logo=javascript&logoColor=white)
+![TypeScript](https://img.shields.io/badge/-TypeScript-blue?logo=typescript&logoColor=white)
+![GitHub top language](https://img.shields.io/github/languages/top/tilvlur/weather-app?color=%233178c6&label=TypeScript&logo=typescript)
+![React](https://img.shields.io/badge/React-17.0.2-2dd5f0?logo=react)
+![Redux](https://img.shields.io/badge/Redux-4.1.2-724eb1?logo=redux)
+![React Router](https://img.shields.io/badge/React_Router-6.2.2-d53d47?logo=reactrouter)
+![HTML5](https://img.shields.io/badge/-HTML5-e9452d?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/-CSS3-0058dd?logo=css3)
+![SASS](https://img.shields.io/badge/-SASS-cf6492?logo=sass&logoColor=white)
+![API OpenWeather](https://img.shields.io/badge/API-OpenWeather-f56a52)
+![API Mapbox](https://img.shields.io/badge/API-Mapbox-orange?logo=mapbox)
+![API IPGeolocation](https://img.shields.io/badge/API-IP_Geolocation-blue)
+![ESLint](https://img.shields.io/badge/-ESLint-413bb7?logo=eslint)
+![Stylelint](https://img.shields.io/badge/-Stylelint-blue?logo=stylelint)
+![Prettier](https://img.shields.io/badge/-Prettier-2f4750?logo=prettier)
+![Git](https://img.shields.io/badge/-Git-fc3332?logo=git&logoColor=white)
+![NPM](https://img.shields.io/badge/-NPM-gray?logo=npm)
+![Yarn](https://img.shields.io/badge/-Yarn-008db4?logo=yarn&logoColor=white)
+![Node.js](https://img.shields.io/badge/-Node.js-006d1a?logo=nodedotjs&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-blue)
 
-## Available Scripts
+### [🌏](https://weather-app.ittim.ru) [Сайт приложения](https://weather-app.ittim.ru)
 
-In the project directory, you can run:
+## Описание
 
-### `npm start`
+Веб-приложение прогноза погоды.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1) На главной странице автоматически определяется местоположение пользователя и показывается текущая погода для данного местоположения:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![task1Gif](./readme_assets/task1.gif)
 
-### `npm run build`
+2) Выбор города возможен в текстовом инпуте с автозаполнением:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![task2Gif](./readme_assets/task2.gif)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3) Кнопка "Save place" в правом верхнем углу добавляет город в список сохранённых городов:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![task3Gif](./readme_assets/task3.gif)
 
-### `npm run eject`
+4) Клик по блоку сохранённого города открывает новый путь (например: "/moscow"), содержащий подробную информацию о погоде в этом городе:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![task4Gif](./readme_assets/task4.gif)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+5) Навигационные ссылки в шапке приложения показывают подробную погоду на сегодня, на завтра или на всю неделю:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![task5Gif](./readme_assets/task5.gif)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+6) На страницах "Today" и "Tomorrow" отображается карта с маркером выбранного города. По клику на маркер выводится окошко с информацией о погоде в данный момент.
+
+![task6Gif](./readme_assets/task6.gif)
+
+## Работа с приложением
+
+### 💻 Установка
+
+```
+npm i
+```
+
+### ⏯ Запуск
+
+```
+npm start
+```
+Приложение будет запущено в режиме разработки.\
+Откройте [http://localhost:3000](http://localhost:3000) для просмотра в браузере.\
+
+⚠️ Для работы приложения необходимо создать файл `.env.local` и в данном файле создать переменные с API-токенами. Имена переменных есть в файле `.env-examples️` ⚠️
+
+### 👷 Сборка
+
+```
+npm run build
+```
+Данная команда создаст и сохранит оптимизированную сборку приложения в папке `build`.
+
+### 👨‍⚕️ Проверка кода на ошибки и их исправление
+
+Проверка:
+
+```
+npm run lint
+```
+
+Исправление:
+
+```
+npm run lint:fix
+```
+
+## License
+
+Copyright © 2022 Timur Khrustalyov. All rights reserved.\
+License: [MIT](LICENSE)
