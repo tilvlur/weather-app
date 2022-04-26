@@ -1,8 +1,8 @@
-$headerHeight: 60px;
-$footerHeight: 30px;
-$headerFooterHeight: $headerHeight + $footerHeight;
+$headerHeight: 80px;
+$footerHeight: 60px;
 
-// Colours
+// Colors
+$appBlack: #000;
 $appWhite: #fff;
 $appGray50: #f2f2f2;
 $appGray100: #ececed;
@@ -15,11 +15,11 @@ $appOrange400: #f86a51;
 $appOrange500: #ff5e44;
 $appTurquoise: #32cebf;
 
+// Pallet
 $appTextColor: $appGray800;
 $appBgColor: $appGray50;
-
 $appButtonTextColor: $appGray50;
 $appButtonBgColor: $appGray450;
 $appCloseButtonBgColor: $appOrange500;
-
 $appActiveBorderColor: $appTurquoise;
+$appBorderColor: $appGray800;

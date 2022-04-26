@@ -4,9 +4,16 @@ import styles from "./Footer.module.scss";
 function Footer() {
   return (
     <footer className={styles.container}>
-      <span>&copy;&nbsp;</span>
-      <span className={styles.appName}>Weather App&nbsp;</span>
-      <span className={styles.name}>by Timur Khrustalev&nbsp;</span>
+      <div className={styles.appName}>
+        <span>Weather&nbsp;</span>
+        <span>App</span>
+      </div>
+      <div className={styles.copyright}>
+        <div className={styles.copy}>
+          Copyright © 2022 Timur Khrustalyov. All rights reserved.
+        </div>
+        <div className={styles.contacts}>Contacts: tilvlur@yandex.com</div>
+      </div>
     </footer>
   );
 }

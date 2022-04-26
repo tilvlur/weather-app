@@ -2,8 +2,9 @@
 
 .container {
   display: flex;
-  justify-content: space-between;
+  flex: 0 1 auto;
   align-items: center;
+  justify-content: space-between;
   height: $headerHeight;
   padding: 0 30px;
   border-bottom: 1px solid $appGray800;

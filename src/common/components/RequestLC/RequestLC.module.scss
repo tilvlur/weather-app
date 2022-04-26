@@ -1,16 +1,16 @@
 @import "../../styles/variables";
 
 .container {
+  flex: 1 0 auto;
   margin: 0 auto;
   padding-top: 200px;
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: bold;
-  height: calc(100vh - #{$headerFooterHeight});
   overflow: auto;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-align: center;
 
   .description {
-    font-size: 1.2rem;
     font-weight: 600;
+    font-size: 1.2rem;
   }
 }
